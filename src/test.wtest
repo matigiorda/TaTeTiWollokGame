@@ -1,0 +1,44 @@
+import tatetigame.*
+
+describe "Tests del tateti entre jugador 1 y jugador 2"
+{
+	const jugador1 = new Jugador1()
+	fixture
+	{
+		tablero.aniadirJugador(jugador1)
+	}
+	
+	
+	test "Al hacer una combinacion 1,2,3 (combinacion ganadora) el jugador 1, el tablero vuelve a su estado original (ya que hubo un ganador)"
+	{
+		jugador1.jugar(1)
+		jugador2.jugar(4)
+		jugador1.jugar(2)
+		jugador2.jugar(5)
+		jugador1.jugar(3)
+		assert.that(tablero.estaVacio())
+	}
+	test "El jugador 1 intenta hacer dos movimientos consecutivos y se lanza una excepcion"
+	{
+		jugador1.jugar(1)
+		assert.throwsExceptionWithMessage("No es el turno del jugador",{jugador1.jugar(2)})
+	}
+	test "Al ocuparse los 9 lugares del tablero (haya ganador o no), el tablero vuelve a estar vacio (se reinicia el tablero)"
+	{
+		jugador1.jugar(1)
+		jugador2.jugar(2)
+		jugador1.jugar(4)
+		jugador2.jugar(7)
+		jugador1.jugar(3)
+		jugador2.jugar(5)
+		jugador1.jugar(6)
+		jugador2.jugar(9)
+		jugador1.jugar(8)
+		assert.that(tablero.estaVacio())
+	}
+	test "El jugador 2 quiere jugar en la misma posicion que el jugador 1 y se lanza una excepcion"
+	{
+		jugador1.jugar(1)
+		assert.throwsExceptionWithMessage("Posicion no habilitada",{jugador2.jugar(1)})
+	}
+	}
