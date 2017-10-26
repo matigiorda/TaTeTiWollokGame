@@ -5,7 +5,7 @@ describe "Tests del tateti entre jugador 1 y jugador 2"
 	const jugador1 = new Jugador1()
 	fixture
 	{
-		tablero.aniadirJugador(jugador1)
+		tablero.elegirRival(jugador1)
 	}
 	
 	
